@@ -19,12 +19,15 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"denoland.vscode-deno"
+				"denoland.vscode-deno",
+				"PeggyJS.peggy-language"
 			],
 			"settings": {
 				"deno.enable": true,
 				"deno.lint": true,
-				"deno.unstable": true
+				"deno.unstable": true,
+				"editor.formatOnSave": true,
+				"[typescript]": { "editor.defaultFormatter": "denoland.vscode-deno" }		
 			}
 		}
 	}

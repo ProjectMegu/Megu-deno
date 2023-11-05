@@ -1,0 +1,27 @@
+{
+    "fmt": {
+        "indentWidth": 4
+    },
+    
+    "test": {
+        "include": [
+            "**/*_test.ts",
+            "**/*_test.js"
+        ]
+    },
+    
+    "tasks": {
+        "test": "deno test --unstable --allow-env --allow-ffi",
+        "peggy": "deno run --allow-read npm:peggy",
+        "parser-gen": "deno run --allow-read --allow-write npm:peggy --format es /workspace/parser/parser.pegjs"
+    },
+    
+    "compilerOptions": {
+        "strict": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noImplicitOverride": true
+    }
+}

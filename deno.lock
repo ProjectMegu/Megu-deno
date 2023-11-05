@@ -1,0 +1,26 @@
+{
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "npm:peggy": "npm:peggy@3.0.2"
+    },
+    "npm": {
+      "commander@10.0.1": {
+        "integrity": "sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug==",
+        "dependencies": {}
+      },
+      "peggy@3.0.2": {
+        "integrity": "sha512-n7chtCbEoGYRwZZ0i/O3t1cPr6o+d9Xx4Zwy2LYfzv0vjchMBU0tO+qYYyvZloBPcgRgzYvALzGWHe609JjEpg==",
+        "dependencies": {
+          "commander": "commander@10.0.1",
+          "source-map-generator": "source-map-generator@0.8.0"
+        }
+      },
+      "source-map-generator@0.8.0": {
+        "integrity": "sha512-psgxdGMwl5MZM9S3FWee4EgsEaIjahYV5AzGnwUvPhWeITz/j6rKpysQHlQ4USdxvINlb8lKfWGIXwfkrgtqkA==",
+        "dependencies": {}
+      }
+    }
+  },
+  "remote": {}
+}
