@@ -3,28 +3,28 @@
 //
 // Accepts expressions like "2 * (3 + 4)" and computes their value.
 
-Expression
-  = head:Term tail:(_ ("+" / "-") _ Term)* {
-      return tail.reduce(function(result, element) {
-        if (element[1] === "+") { return result + element[3]; }
-        if (element[1] === "-") { return result - element[3]; }
-      }, head);
-    }
+{{
+    import * as Ast from "../ast/mod.ts";
+}}
 
-Term
-  = head:Factor tail:(_ ("*" / "/") _ Factor)* {
-      return tail.reduce(function(result, element) {
-        if (element[1] === "*") { return result * element[3]; }
-        if (element[1] === "/") { return result / element[3]; }
-      }, head);
-    }
+Source = Expr
 
-Factor
-  = "(" _ expr:Expression _ ")" { return expr; }
-  / Integer
+DefFunc
+    = "fn" _ ident:Ident _ "(" _ ")" _ "[" inner:DefFuncInner "]" _ {return new Ast.DefFunc(ident, inner)}
 
-Integer "integer"
-  = _ [0-9]+ { return parseInt(text(), 10); }
+DefFuncInner
+    = _ stmts:Stmt|.., _nr "\n"+ _nr | _ { return stmts }
 
-_ "whitespace"
-  = [ \t\n\r]*
+Stmt = Expr
+
+Expr = CallFunc
+
+CallFunc
+    = ident:Ident _ "(" args:CallFuncArgs? ")" _nr { return new Ast.CallFunc([ident], args) }
+
+CallFuncArgs
+    = args:Expr|..,_ "," _| { return args }
+
+Ident = [a-zA-Z][a-zA-Z0-9]* { return text() }
+_nr = [ \t]* { return }
+_ = [ \t\n\r]* { return }
