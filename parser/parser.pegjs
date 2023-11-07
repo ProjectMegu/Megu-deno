@@ -1,8 +1,3 @@
-// Simple Arithmetics Grammar
-// ==========================
-//
-// Accepts expressions like "2 * (3 + 4)" and computes their value.
-
 {{
     import * as Ast from "../ast/mod.ts";
 }}
@@ -10,12 +5,17 @@
 Source = _ def:Def|.., _ | _ { return new Ast.Source("",def) }
 
 Def = DefFunc
+    / NameSpace
 
 DefFunc
     = "fn" _ ident:Ident _ "(" _ ")" _ "[" inner:DefFuncInner "]" _ {return new Ast.DefFunc(ident, inner)}
 
 DefFuncInner
     = _ stmts:Stmt|.., _nr "\n"+ _nr | _ { return stmts }
+
+NameSpace = NameSpaceBlock / NameSpaceLine
+NameSpaceLine = "nspace" _ ref:DotRef _ { return new Ast.NameSpaceLine(ref) }
+NameSpaceBlock = "nspace" _ ref:DotRef _ "[" _ def:Def|.., _| _ "]" _ { return new Ast.NameSpaceBlock(ref, def) }
 
 Stmt = Expr
 
@@ -27,6 +27,7 @@ CallFunc
 CallFuncArgs
     = args:Expr|..,_ "," _| { return args }
 
+DotRef = ident:Ident|..,_ "." _| { return ident }
 Ident = [a-zA-Z][a-zA-Z0-9]* { return text() }
 _nr = [ \t]* { return }
 _ = [ \t\n\r]* { return }
