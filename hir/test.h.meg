@@ -1,0 +1,5 @@
+mod A [
+    fn Main() where "__ROOT__/test.meg" [
+        Core.Hello()
+    ]
+]

@@ -1,0 +1,4 @@
+[[dependencies]]
+name = "BModule"
+place = "local"
+url = "./BModule"

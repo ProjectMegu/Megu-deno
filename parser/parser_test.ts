@@ -7,6 +7,7 @@ import * as Assert from "https://deno.land/std@0.205.0/assert/mod.ts";
 Deno.test("Some test", () => {
     const expect = "Some" ;
     const input = "Some";
+    // @ts-expect-error: startRuleの部分により安全
     Assert.assertEquals(expect, parse(input, { startRule: "Some" }));
 });
 
@@ -15,18 +16,21 @@ Deno.test("Some test", () => {
 Deno.test("DefFunc", () => {
     const expect = new Ast.DefFunc("Main", []);
     const input = "fn Main() [ ]";
+    // @ts-expect-error: startRuleの部分により安全
     Assert.assertEquals(expect, parse(input, { startRule: "DefFunc" }));
 });
 
 Deno.test("DefFunc with Inner", () => {
     const expect = new Ast.DefFunc("Main", [new Ast.CallFunc(["Test"], []), new Ast.CallFunc(["Test"], [])]);
     const input = "fn Main() [ Test() \n Test()]";
+    // @ts-expect-error: startRuleの部分により安全
     Assert.assertEquals(expect, parse(input, { startRule: "DefFunc" }));
 });
 
 Deno.test("CallFunc", () => {
     const expect = new Ast.CallFunc(["Test"], []);
     const input = "Test()";
+    // @ts-expect-error: startRuleの部分により安全
     Assert.assertEquals(expect, parse(input, { startRule: "CallFunc" }));
 });
 
@@ -36,5 +40,6 @@ Deno.test("CallFunc and Arg", () => {
         [new Ast.CallFunc(["Test2"], []), new Ast.CallFunc(["Test3"], [])],
     );
     const input = "Test(Test2(), Test3())";
+    // @ts-expect-error: startRuleの部分により安全
     Assert.assertEquals(expect, parse(input, { startRule: "CallFunc" }));
 });

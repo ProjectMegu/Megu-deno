@@ -7,7 +7,9 @@
     import * as Ast from "../ast/mod.ts";
 }}
 
-Source = Expr
+Source = _ def:Def|.., _ | _ { return new Ast.Source("",def) }
+
+Def = DefFunc
 
 DefFunc
     = "fn" _ ident:Ident _ "(" _ ")" _ "[" inner:DefFuncInner "]" _ {return new Ast.DefFunc(ident, inner)}

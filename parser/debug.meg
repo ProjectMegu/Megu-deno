@@ -1,0 +1,5 @@
+
+fn main() [
+    Test(Test(), Test())
+    Test()
+]

@@ -20,7 +20,8 @@
 		"vscode": {
 			"extensions": [
 				"denoland.vscode-deno",
-				"PeggyJS.peggy-language"
+				"PeggyJS.peggy-language",
+				"tamasfe.even-better-toml"
 			],
 			"settings": {
 				"deno.enable": true,
