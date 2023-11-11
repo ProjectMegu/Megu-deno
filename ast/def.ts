@@ -1,29 +1,33 @@
 import { Stmt } from "./stmt.ts";
 import { Ident } from "./util.ts";
 
-export type Def = DefFunc | NameSpaceLine | NameSpaceBlock
+export type Def = DefFunc | NameSpaceLine | NameSpaceBlock;
 
 export class DefFunc {
-    ident: Ident
-    inner: Stmt[]
+    ident: Ident;
+    inner: Stmt[];
     constructor(ident: Ident, inner: Stmt[]) {
-        this.ident = ident
-        this.inner = inner
+        this.ident = ident;
+        this.inner = inner;
     }
 }
 
 export class NameSpaceLine {
-    ref: string[]
-    constructor(ref: string[]) {
-        this.ref = ref
+    isRelative: boolean;
+    ref: string[];
+    constructor(isRelative: boolean, ref: string[]) {
+        this.isRelative = isRelative;
+        this.ref = ref;
     }
 }
 
 export class NameSpaceBlock {
-    ref: string[]
-    defs: Def[]
-    constructor(ref: string[], defs: Def[]) {
-        this.ref = ref
-        this.defs = defs
+    isRelative: boolean;
+    ref: string[];
+    defs: Def[];
+    constructor(isRelative: boolean, ref: string[], defs: Def[]) {
+        this.isRelative = isRelative;
+        this.ref = ref;
+        this.defs = defs;
     }
 }

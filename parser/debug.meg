@@ -1,5 +1,6 @@
+nspace .Test.A
 
 fn main() [
-    Test(Test(), Test())
+    Test("Hello!", "")
     Test()
 ]

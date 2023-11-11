@@ -31,17 +31,24 @@ Deno.test("DefFunc with Inner", () => {
 });
 
 Deno.test("NameSpaceLine", () => {
-    const expect = new Ast.NameSpaceLine(["A", "B", "C"]);
+    const expect = new Ast.NameSpaceLine(false,["A", "B", "C"]);
     const input = "nspace A.B  . C";
     // @ts-ignore: startRuleの部分により安全
     Assert.assertEquals(expect, parse(input, { startRule: "NameSpaceLine" }));
 });
 
 Deno.test("NameSpaceBlock", () => {
-    const expect = new Ast.NameSpaceBlock(["A", "B", "C"], [new Ast.DefFunc("Test",[])]) ;
+    const expect = new Ast.NameSpaceBlock(false,["A", "B", "C"], [new Ast.DefFunc("Test",[])]) ;
     const input = "nspace A.B.C [ fn Test() [] ]";
     // @ts-ignore: startRuleの部分により安全
-    Assert.assertEquals(expect, parse(input, { startRule: "Def" }));
+    Assert.assertEquals(expect, parse(input, { startRule: "NameSpace" }));
+});
+
+Deno.test("NameSpaceLine isRelative", () => {
+    const expect = new Ast.NameSpaceLine(true, ["a", "b"]) ;
+    const input = "nspace .a.b";
+    // @ts-ignore: startRuleの部分により安全
+    Assert.assertEquals(expect, parse(input, { startRule: "NameSpace" }));
 });
 
 Deno.test("CallFunc", () => {
@@ -59,4 +66,11 @@ Deno.test("CallFunc and Arg", () => {
     const input = "Test(Test2(), Test3())";
     // @ts-ignore: startRuleの部分により安全
     Assert.assertEquals(expect, parse(input, { startRule: "CallFunc" }));
+});
+
+Deno.test("StringLit", () => {
+    const expect = 'test\\"\\n';
+    const input = '"test\\"\\n"';
+    // @ts-ignore: startRuleの部分により安全
+    Assert.assertEquals(expect, parse(input, { startRule: "StringLit" }));
 });
