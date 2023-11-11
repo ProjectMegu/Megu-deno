@@ -14,14 +14,14 @@ Deno.test("Some test", () => {
 */
 
 Deno.test("DefFunc", () => {
-    const expect = new Ast.DefFunc("Main", []);
+    const expect = new Ast.DefFunc("Main", new Ast.FuncSignature([],null),[]);
     const input = "fn Main() [ ]";
     // @ts-ignore: startRuleの部分により安全
     Assert.assertEquals(expect, parse(input, { startRule: "DefFunc" }));
 });
 
 Deno.test("DefFunc with Inner", () => {
-    const expect = new Ast.DefFunc("Main", [
+    const expect = new Ast.DefFunc("Main", new Ast.FuncSignature([],null),[
         new Ast.CallFunc(["Test"], []),
         new Ast.CallFunc(["Test"], []),
     ]);
@@ -38,7 +38,7 @@ Deno.test("NameSpaceLine", () => {
 });
 
 Deno.test("NameSpaceBlock", () => {
-    const expect = new Ast.NameSpaceBlock(false,["A", "B", "C"], [new Ast.DefFunc("Test",[])]) ;
+    const expect = new Ast.NameSpaceBlock(false,["A", "B", "C"], [new Ast.DefFunc("Test",new Ast.FuncSignature([],null),[])]) ;
     const input = "nspace A.B.C [ fn Test() [] ]";
     // @ts-ignore: startRuleの部分により安全
     Assert.assertEquals(expect, parse(input, { startRule: "NameSpace" }));

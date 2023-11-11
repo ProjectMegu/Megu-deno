@@ -1,6 +1,3 @@
-nspace .Test.A
-
-fn main() [
-    Test("Hello!", "")
-    Test()
+fn Main(args: Test) [
+    Print("Hello")
 ]
