@@ -13,7 +13,7 @@
     "tasks": {
         "test": "deno task parser-gen && deno test --unstable --allow-env --allow-ffi",
         "peggy": "deno run --allow-read npm:peggy",
-        "parser-gen": "deno run --allow-read --allow-write npm:peggy --allowed-start-rules \"*\" --format es /workspace/parser/parser.pegjs"
+        "parser-gen": "deno run --allow-read --allow-write npm:peggy --allowed-start-rules \"*\" --format es ./parser/parser.pegjs"
     },
     
     "compilerOptions": {
