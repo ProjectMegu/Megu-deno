@@ -21,7 +21,15 @@
 			"extensions": [
 				"denoland.vscode-deno",
 				"PeggyJS.peggy-language",
-				"tamasfe.even-better-toml"
+				"tamasfe.even-better-toml",
+				"GitHub.vscode-pull-request-github",
+				"GitHub.vscode-github-actions",
+				"eamodio.gitlens",
+				"Gruntfuggly.todo-tree",
+				"aaron-bond.better-comments",
+				"vscode-icons-team.vscode-icons",
+				"christian-kohler.path-intellisense",
+				"adam-bender.commit-message-editor"
 			],
 			"settings": {
 				"deno.enable": true,
