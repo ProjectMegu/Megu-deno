@@ -1,5 +1,6 @@
 {{
     import * as Ast from "../ast/mod.ts";
+    import * as Util from "./util.ts";
 }}
 
 Source = _ def:Def|.., _ | _ { return new Ast.Source("",def) }
@@ -27,6 +28,14 @@ DefFuncArgs
 NameSpace = NameSpaceBlock / NameSpaceLine
 NameSpaceLine = "nspace" _ dot:IsDot _ ref:DotRef _ { return new Ast.NameSpaceLine(dot,ref) }
 NameSpaceBlock = "nspace" _ dot:IsDot _ ref:DotRef _ "[" _ def:Def|.., _| _ "]" _ { return new Ast.NameSpaceBlock(dot,ref, def) }
+
+Use = "use" _ ref:IsDot _ tree:UseTree { return new Ast.Use(ref, tree.intoUseList()) }
+UseTree =
+    path:DotRef _ "." _ "[" _ trees:UseTree|..,_ "," _| _ "]" {
+        return new Util.UseInternal(path, trees)
+    }
+    / path:DotRef { return new Util.UseInternal(path,null) }
+    
 
 Stmt = Expr
 

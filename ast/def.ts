@@ -15,9 +15,9 @@ export class DefFunc {
 }
 
 export class FuncSignature {
-    args: {name: string, type: Type}[];
+    args: { name: string; type: Type }[];
     returnVal: Type | null;
-    constructor(args: {name: string, type: Type}[], returnVal: Type | null) {
+    constructor(args: { name: string; type: Type }[], returnVal: Type | null) {
         this.args = args;
         this.returnVal = returnVal;
     }
@@ -42,3 +42,16 @@ export class NameSpaceBlock {
         this.defs = defs;
     }
 }
+
+export class Use {
+    isRelative: boolean;
+    tree: UseList
+    constructor(isRelative: boolean, tree: UseList) {
+        this.isRelative = isRelative
+        this.tree = tree
+    }
+}
+
+export type UseList = Ident[][]
+
+
