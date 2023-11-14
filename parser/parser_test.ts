@@ -66,6 +66,13 @@ Deno.test("Use", () => {
     Assert.assertEquals(expect, parse(input, { startRule: "Use" }));
 });
 
+Deno.test("Use isRelative === true", () => {
+    const expect = new Ast.Use(true, [["Test"]]);
+    const input = "use .Test";
+    // @ts-ignore: startRuleの部分により安全
+    Assert.assertEquals(expect, parse(input, { startRule: "Use" }));
+});
+
 Deno.test("CallFunc", () => {
     const expect = new Ast.CallFunc(["Test"], []);
     const input = "Test()";
