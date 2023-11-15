@@ -4,6 +4,11 @@ import { Show } from "../util/mod.ts";
 import { Context, Dir, Module } from "../ast/mod.ts";
 import { parse } from "../parser/parser.js";
 
+/**
+ * Meguのコンパイルを開始する  
+ * エントリーポイント
+ * @param module_path main-moduleのパス
+ */
 export function MeguCompile(module_path: string) {
     let setting: Record<string, any>;
     try {
@@ -13,6 +18,8 @@ export function MeguCompile(module_path: string) {
         Deno.exit(1);
     }
 
+    // 1次依存のロード
+    // 2次依存の検出はいつか
     let dependencies: string[] = [];
     for (const item of setting.dependencies) {
         switch (item.place) {
@@ -29,6 +36,8 @@ export function MeguCompile(module_path: string) {
     } // TODO: 流石に依存先の依存もロードする....
 
     // Create AST
+    // メモリ上にコードをすべて載せるのは流石にあれなので､ 
+    // TODO: 分割コンパイルを実装する
     dependencies.push(module_path); // 仮
 
     function dir_s(path: string): Dir {
@@ -70,18 +79,29 @@ export function MeguCompile(module_path: string) {
         context.AddModule(module);
     }
 
-    Show(context)
+    // ToHir -> GenLLVM
 }
 
+/**
+ * 拡張子と思わしきもののすべてを抜き出す
+ * @param fileName 拡張子を含むファイルの名前
+ * @returns 拡張子(.d.ts)とか
+ */
 function getExtension(fileName: string): string {
     if (fileName.includes(".")) {
         let index = fileName.indexOf(".");
         return fileName.slice(index);
     } else {
+        // TODO: errorを返さない
         throw new Error("No extension found");
     }
 }
 
+/**
+ * パスの中からディレクトリ名を抜き出す
+ * @param path path/aなどの/で繋がれたパス
+ * @returns path/aのとき､a
+ */
 function getDirName(path: string): string {
     if (path.includes("/")) {
         let index = path.lastIndexOf("/");
@@ -90,5 +110,3 @@ function getDirName(path: string): string {
         throw new Error("No extension found");
     }
 }
-
-MeguCompile("/workspace/sand/AModule");
