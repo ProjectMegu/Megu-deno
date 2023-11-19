@@ -64,4 +64,5 @@ jobs:
             deno fmt --check
         - name: Run Check
           run: |
+            deno task parser-gen
             deno check **/*.ts
