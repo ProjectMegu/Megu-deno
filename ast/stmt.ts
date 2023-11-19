@@ -1,3 +1,6 @@
 import { Expr } from "./expr.ts";
 
-export type Stmt = Expr
+/**
+ * 式として書けないステートメント
+ */
+export type Stmt = Expr;

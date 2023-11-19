@@ -7,7 +7,9 @@ export * from "./stmt.ts";
 // (imports)
 import { Def } from "./def.ts";
 
+/** すべての依存関係を含めた､コンパイル全体 */
 export class Context {
+    /** コンパイルするモジュール群 */
     mod: Module[];
     constructor(mod: Module[]) {
         this.mod = mod;
@@ -18,8 +20,16 @@ export class Context {
     }
 }
 
+/**
+ * 依存関係の単位
+ * Rustで言うCrate
+ */
 export class Module {
     name: string;
+    /**
+     * 含まれるディレクトリ群
+     * Rootに含まれるものは"__ROOT__"に含まれる
+     */
     dir: Dir[];
     constructor(name: string, dir: Dir[]) {
         this.name = name;
@@ -31,9 +41,15 @@ export class Module {
     }
 }
 
+/**
+ * ディレクトリ
+ */
 export class Dir {
+    /** ディレクトリ名 */
     name: string;
+    /** 含まれているソースファイル */
     source: Source[];
+    /** 含まれるディレクトリ */
     dir: Dir[];
     constructor(name: string, source: Source[], dir: Dir[]) {
         this.name = name;
@@ -46,12 +62,16 @@ export class Dir {
     }
 
     AddDir(dir: Dir) {
-        this.dir.push(dir)
+        this.dir.push(dir);
     }
 }
 
+/**
+ * ソースファイル
+ */
 export class Source {
     name: string;
+    /** 含まれる定義 */
     defs: Def[];
     constructor(name: string, defs: Def[]) {
         this.name = name;
