@@ -5,7 +5,7 @@ import { Ident } from "./util.ts";
 /**
  * 関数内に書かれる式
  */
-export type Expr = CallFunc | string /** 変数 */
+export type Expr = CallFunc | string /** 文字列 */
 
 /**
  * 関数呼び出し
