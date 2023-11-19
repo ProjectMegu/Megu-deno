@@ -2,7 +2,7 @@ import { Stmt } from "./stmt.ts";
 import { Ident, Type } from "./util.ts";
 
 /**
- * Top-Scopeに置かれる､定義系のもの  
+ * Top-Scopeに置かれる､定義系のもの
  * 関数・ネームスペース・Useなど
  */
 export type Def = DefFunc | NameSpaceLine | NameSpaceBlock | Use;
@@ -71,23 +71,21 @@ export class NameSpaceBlock {
 }
 
 /**
- * use文  
+ * use文
  * スコープに引き込む構文
  */
 export class Use {
     /** 相対的な名前空間定義かどうか */
     isRelative: boolean;
     /** そのUse文に含まれるPath */
-    tree: UseList
+    tree: UseList;
     constructor(isRelative: boolean, tree: UseList) {
-        this.isRelative = isRelative
-        this.tree = tree
+        this.isRelative = isRelative;
+        this.tree = tree;
     }
 }
 
 /**
  * Useに含まれるPath
  */
-export type UseList = Ident[][]
-
-
+export type UseList = Ident[][];

@@ -21,13 +21,13 @@ export class Context {
 }
 
 /**
- * 依存関係の単位  
+ * 依存関係の単位
  * Rustで言うCrate
  */
 export class Module {
     name: string;
-    /** 
-     * 含まれるディレクトリ群  
+    /**
+     * 含まれるディレクトリ群
      * Rootに含まれるものは"__ROOT__"に含まれる
      */
     dir: Dir[];
@@ -62,7 +62,7 @@ export class Dir {
     }
 
     AddDir(dir: Dir) {
-        this.dir.push(dir)
+        this.dir.push(dir);
     }
 }
 

@@ -6,14 +6,16 @@ import { parse } from "../parser/parser.js";
 import { MeguModuleSetting } from "./settingType.ts";
 
 /**
- * Meguのコンパイルを開始する  
+ * Meguのコンパイルを開始する
  * エントリーポイント
  * @param module_path main-moduleのパス
  */
 export function MeguCompile(module_path: string) {
     let setting: MeguModuleSetting;
     try {
-        setting = parseToml(Deno.readTextFileSync(module_path + "/Megu.toml")) as MeguModuleSetting 
+        setting = parseToml(
+            Deno.readTextFileSync(module_path + "/Megu.toml"),
+        ) as MeguModuleSetting;
     } catch (error) {
         console.log(`File Load Error: ${error}`);
         Deno.exit(1);
@@ -37,7 +39,7 @@ export function MeguCompile(module_path: string) {
     } // TODO: 流石に依存先の依存もロードする....
 
     // Create AST
-    // メモリ上にコードをすべて載せるのは流石にあれなので､ 
+    // メモリ上にコードをすべて載せるのは流石にあれなので､
     // TODO: 分割コンパイルを実装する
     dependencies.push(module_path); // 仮
 
@@ -55,7 +57,7 @@ export function MeguCompile(module_path: string) {
                 continue;
             }
         }
-        return res
+        return res;
     }
 
     const context = new Context([]);
@@ -93,7 +95,7 @@ function getExtension(fileName: string): string {
         const index = fileName.indexOf(".");
         return fileName.slice(index);
     } else {
-        return ""
+        return "";
     }
 }
 
@@ -107,6 +109,6 @@ function getDirName(path: string): string {
         const index = path.lastIndexOf("/");
         return path.slice(index + 1);
     } else {
-        return path
+        return path;
     }
 }

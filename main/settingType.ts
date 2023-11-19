@@ -1,9 +1,9 @@
 export type MeguModuleSetting = {
-    dependencies: DependencyData[]
-}
+    dependencies: DependencyData[];
+};
 
 export type DependencyData = {
-    name: string,
-    place: "local",
-    url: string
-}
+    name: string;
+    place: "local";
+    url: string;
+};
