@@ -10,6 +10,12 @@
         ]
     },
 
+    "lint": {
+        "exclude": [
+            "parser/parser.js"
+        ]
+    },
+
     "tasks": {
         "test": "deno task parser-gen && deno test --unstable --allow-env --allow-ffi",
         "peggy": "deno run --allow-read npm:peggy",
