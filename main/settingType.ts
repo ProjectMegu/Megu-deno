@@ -4,6 +4,6 @@ export type MeguModuleSetting = {
 
 export type DependencyData = {
     name: string;
-    place: "local";
+    place: "local" | "git" | "repo";
     url: string;
 };

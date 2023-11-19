@@ -9,7 +9,7 @@
 
 /// ファイル全体
 /// @return {Ast.Source}
-Source = _ def:Def|.., _ | _ { return new Ast.Source("",def) }
+Source = _ def:Def|.., _ | _ { return new Ast.Source("", def); }
 
 /// 定義
 /// @return {Ast.Def}
@@ -18,7 +18,7 @@ Def = DefFunc
     / Use
 
 /// 関数定義
-/// @retunr {Ast.DefFunc}
+/// @return {Ast.DefFunc}
 DefFunc
     = "fn" _ ident:Ident _ sig:DefFuncSignature _ "[" inner:DefFuncInner "]" _ {return new Ast.DefFunc(ident,sig,inner)}
 
@@ -51,7 +51,7 @@ NameSpace = NameSpaceBlock / NameSpaceLine
 /// File全体に働く
 /// @return {Ast.NameSpaceLine}
 NameSpaceLine = "nspace" _ dot:IsDot _ ref:DotRef _ { 
-    if (useNameSpaceLine) { error("Don't use NameSpaceLine twice"); return undefined }
+    if (useNameSpaceLine) { error("NameSpaceLine used more than once."); throw new Error("NameSpaceLine used more than once."); }
     useNameSpaceLine = true
     return new Ast.NameSpaceLine(dot,ref) }
 
@@ -83,7 +83,7 @@ Expr = CallFunc / StringLit
 /// 関数呼び出し
 /// @return {Ast.CallFunc}
 CallFunc
-    = ident:Ident _ "(" args:CallFuncArgs? ")" _nr { return new Ast.CallFunc([ident], args) }
+    = ident:Ident _ "(" args:CallFuncArgs? ")" _nr { return new Ast.CallFunc([ident], args || []) }
 
 /// 関数の引数
 /// @return {Ast.Expr[]}
