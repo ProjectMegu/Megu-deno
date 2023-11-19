@@ -5,7 +5,7 @@ import { Ident, Type } from "./util.ts";
  * Top-Scopeに置かれる､定義系のもの  
  * 関数・ネームスペース・Useなど
  */
-export type Def = DefFunc | NameSpaceLine | NameSpaceBlock;
+export type Def = DefFunc | NameSpaceLine | NameSpaceBlock | Use;
 
 /**
  * 関数定義

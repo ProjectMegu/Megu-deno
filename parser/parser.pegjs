@@ -3,6 +3,10 @@
     import * as Util from "./util.ts";
 }}
 
+{
+    let useNameSpaceLine = false;
+}
+
 /// ファイル全体
 /// @return {Ast.Source}
 Source = _ def:Def|.., _ | _ { return new Ast.Source("",def) }
@@ -11,6 +15,7 @@ Source = _ def:Def|.., _ | _ { return new Ast.Source("",def) }
 /// @return {Ast.Def}
 Def = DefFunc
     / NameSpace
+    / Use
 
 /// 関数定義
 /// @retunr {Ast.DefFunc}
@@ -45,7 +50,10 @@ NameSpace = NameSpaceBlock / NameSpaceLine
 /// ブロックを持たない名前空間  
 /// File全体に働く
 /// @return {Ast.NameSpaceLine}
-NameSpaceLine = "nspace" _ dot:IsDot _ ref:DotRef _ { return new Ast.NameSpaceLine(dot,ref) }
+NameSpaceLine = "nspace" _ dot:IsDot _ ref:DotRef _ { 
+    if (useNameSpaceLine) { error("Don't use NameSpaceLine twice"); return undefined }
+    useNameSpaceLine = true
+    return new Ast.NameSpaceLine(dot,ref) }
 
 /// ブロックを持つ名前空間
 /// @return {Ast.NameSpaceBlock}

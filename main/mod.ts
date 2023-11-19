@@ -3,6 +3,7 @@ import { parse as parseToml } from "https://deno.land/std@0.207.0/toml/mod.ts";
 import { Show } from "../util/mod.ts";
 import { Context, Dir, Module } from "../ast/mod.ts";
 import { parse } from "../parser/parser.js";
+import { MeguModuleSetting } from "./settingType.ts";
 
 /**
  * Meguのコンパイルを開始する  
@@ -10,9 +11,9 @@ import { parse } from "../parser/parser.js";
  * @param module_path main-moduleのパス
  */
 export function MeguCompile(module_path: string) {
-    let setting: Record<string, any>;
+    let setting: MeguModuleSetting;
     try {
-        setting = parseToml(Deno.readTextFileSync(module_path + "/Megu.toml"));
+        setting = parseToml(Deno.readTextFileSync(module_path + "/Megu.toml")) as MeguModuleSetting 
     } catch (error) {
         console.log(`File Load Error: ${error}`);
         Deno.exit(1);
@@ -20,7 +21,7 @@ export function MeguCompile(module_path: string) {
 
     // 1次依存のロード
     // 2次依存の検出はいつか
-    let dependencies: string[] = [];
+    const dependencies: string[] = [];
     for (const item of setting.dependencies) {
         switch (item.place) {
             case "local":
@@ -89,11 +90,10 @@ export function MeguCompile(module_path: string) {
  */
 function getExtension(fileName: string): string {
     if (fileName.includes(".")) {
-        let index = fileName.indexOf(".");
+        const index = fileName.indexOf(".");
         return fileName.slice(index);
     } else {
-        // TODO: errorを返さない
-        throw new Error("No extension found");
+        return ""
     }
 }
 
@@ -104,9 +104,9 @@ function getExtension(fileName: string): string {
  */
 function getDirName(path: string): string {
     if (path.includes("/")) {
-        let index = path.lastIndexOf("/");
+        const index = path.lastIndexOf("/");
         return path.slice(index + 1);
     } else {
-        throw new Error("No extension found");
+        return path
     }
 }
