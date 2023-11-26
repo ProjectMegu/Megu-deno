@@ -1,6 +1,6 @@
 import { parse } from "./parser.js";
 import * as Ast from "../ast/mod.ts";
-import * as Assert from "https://deno.land/std@0.207.0/assert/mod.ts";
+import * as Assert from "https://deno.land/std@0.208.0/assert/mod.ts";
 
 /*
 

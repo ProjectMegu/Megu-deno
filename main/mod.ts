@@ -1,5 +1,5 @@
-import { parse as parseToml } from "https://deno.land/std@0.207.0/toml/mod.ts";
-// import { walkSync } from "https://deno.land/std@0.207.0/fs/mod.ts"
+import { parse as parseToml } from "https://deno.land/std@0.208.0/toml/mod.ts";
+// import { walkSync } from "https://deno.land/std@0.208.0/fs/mod.ts"
 import { Show } from "../util/mod.ts";
 import { Context, Dir, Module } from "../ast/mod.ts";
 import { parse } from "../parser/parser.js";
