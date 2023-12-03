@@ -2,7 +2,7 @@ import { Stmt } from "./stmt.ts";
 import { Ident, Type } from "./util.ts";
 
 /**
- * Top-Scopeに置かれる､定義系のもの
+ * Top-Scopeに置かれる､定義系のものです
  * 関数・ネームスペース・Useなど
  */
 export type Def = DefFunc | NameSpaceLine | NameSpaceBlock | Use;
